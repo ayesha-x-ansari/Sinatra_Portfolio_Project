@@ -22,13 +22,32 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] == "" || params[:password] == ""
+
+    if params[:name] == "" || params[:email] == ""  || params[:username] == "" || params[:password] == ""
+      flash[:message] = "All fields should be filled"
       redirect to '/signup'
-    else
-      @user = User.create(:username => params[:username], :password => params[:password])
-      session[:user_id] = @user.id
-      redirect '/bags'
     end
+
+    user = User.find_by(:username => params[:username])
+    if !user.nil?
+      flash[:message] = "A account already exists with this username"
+      redirect("/signup")
+    end
+
+    user = User.find_by(:email => params[:email])
+    if !user.nil?
+      flash[:message] = "A account already exists with this email address"
+      redirect("/signup")
+    end
+
+    if params[:password].size < 8
+      flash[:message] = "Password cannot be less than 8 characters"
+      redirect("/signup")
+    end
+
+    @user = User.create(:name => params[:name], :email => params[:email], :username => params[:username], :password => params[:password])
+    session[:user_id] = @user.id
+    redirect '/login'
   end
 
   get '/login' do
@@ -36,7 +55,8 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/login'
     else
-      redirect '/bags'
+      erb :'users/login'
+    #  redirect '/bags'
     end
   end
 

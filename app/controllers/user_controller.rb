@@ -50,6 +50,8 @@ class UsersController < ApplicationController
     redirect '/login'
   end
 
+
+
   get '/login' do
     @error_message = params[:error]
     if !session[:user_id]
@@ -60,14 +62,19 @@ class UsersController < ApplicationController
     end
   end
 
+
   post '/login' do
-    user = User.find_by(:username => params[:username])
+    user = User.find_by(:email => params[:email])
     if user && user.authenticate(params[:password])
+  #  if user && user.password  == params[:password]
       session[:user_id] = user.id
-      redirect "/bags"
+      #redirect "/bags"
+      "ddddddddddd"
     else
-      redirect to '/signup'
+      "#{user}"
+      #redirect to '/signup'
     end
+
   end
 
   get '/logout' do

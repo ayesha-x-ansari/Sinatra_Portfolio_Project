@@ -1,5 +1,28 @@
 class UsersController < ApplicationController
 
+  get '/reset' do
+    erb :'users/reset'
+  end
+
+  post '/reset' do
+    "ddddddd"
+    if params[:email] == "" || params[:password] == ""
+        flash[:message] = "All fields should be filled"
+        redirect to '/reset'
+    end
+      user = User.find_by_email(params[:email])
+      user.password = params[:password]
+      user.save
+  #    erb :show
+
+    #  user = User.find_by(:email => params[:email])
+    #  if !user.nil?
+    #   @user = User.update(:password => params[:password])
+    #   session[:user_id] = @user.id
+    #   redirect("/login")
+    #   end
+    end
+
   get '/users/:id' do
     if !logged_in?
       redirect '/bags'
@@ -40,7 +63,7 @@ class UsersController < ApplicationController
       redirect("/signup")
     end
 
-    if params[:password].size < 8
+    if params[:password].size < 5
       flash[:message] = "Password cannot be less than 8 characters"
       redirect("/signup")
     end
@@ -64,6 +87,17 @@ class UsersController < ApplicationController
 
 
   post '/login' do
+    if params[:email] == ""  || params[:password] == ""
+      flash[:message] = "All fields should be filled"
+      redirect to '/login'
+    end
+
+    user = User.find_by(:email => params[:email])
+    if user.nil?
+      flash[:message] = "Can't find your email please try again"
+      redirect("/login")
+    end
+
     user = User.find_by(:email => params[:email])
     if user && user.authenticate(params[:password])
   #  if user && user.password  == params[:password]
@@ -71,8 +105,7 @@ class UsersController < ApplicationController
       #redirect "/bags"
       "ddddddddddd"
     else
-      "#{user}"
-      #redirect to '/signup'
+      redirect to '/reset'
     end
 
   end

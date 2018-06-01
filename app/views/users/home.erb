@@ -1,3 +1,5 @@
-"Welcome, <%=@user.name%>!"
+<% if logged_in? %>
+      <h1>Welcome <%=current_user.name %></h1>
 
-<a href='/logout'>Log Out</a>
+      <h4><a href='/logout'>Log Out</a></h4>
+    <% end %>

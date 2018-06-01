@@ -5,9 +5,9 @@
   <font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form method="post" action="/login">
      Email   <input type="text" name="email"><br>
-  Password   <input type="text" name="password"><br>
+  Password   <input type="password" name="password"><br>
 
-  <input class="btn btn-primary" type="submit" value="Login" > | <a href='/reset'>Forgot password</a>
+  <input type="submit" value="Login" > | <a href='/reset'>Forgot password</a>
 </form>
 
 <div> Don't have a account? <button onclick="window.location.href='/signup'">Join now</button></div></pre>

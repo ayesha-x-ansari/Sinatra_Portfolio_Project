@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if !session[:user_id]
       erb :'users/new'
     else
-      redirect to '/users/home'
+      erb :'/users/home'
     end
   end
 
@@ -77,21 +77,21 @@ class UsersController < ApplicationController
       user.password = params[:password]
       user.save
       session[:user_id] = user.id
-      redirect "/users/home"
+      erb :'/users/home'
       end
 
-  get '/users/:id' do
-    if !logged_in?
-      redirect '/bags'
-    end
+  #get '/users/:id' do
+  #  if !logged_in?
+  #    redirect '/bags'
+  #  end
 
-    @user = User.find(params[:id])
-    if !@user.nil? && @user == current_user
-      erb :'users/show'
-    else
-      redirect '/bags'
-    end
-  end
+  #  @user = User.find(params[:id])
+  #  if !@user.nil? && @user == current_user
+  #    erb :'users/show'
+  #  else
+  #    redirect '/bags'
+  #  end
+  #end
 
   get '/logout' do
     if session[:user_id] != nil

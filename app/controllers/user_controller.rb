@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
     @user = User.create(:name => params[:name], :email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
-    redirect '/users/home'
+    erb :'/users/home'
   end
 
   get '/login' do

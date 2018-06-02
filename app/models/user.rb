@@ -3,5 +3,5 @@ class User < ActiveRecord::Base
 #  include Slugifiable::InstanceMethods
 #  extend Slugifiable::ClassMethods
   has_many :books
-  has_many :categorys, through: :books
+  has_many :categoryies, through: :books
 end

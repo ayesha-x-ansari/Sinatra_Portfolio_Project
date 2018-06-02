@@ -1,6 +1,8 @@
+require_all 'app'
+#require_all 'lib'
 class Book < ActiveRecord::Base
-#  include Slugifiable::InstanceMethods
-#  extend Slugifiable::ClassMethods
+ include Slugifiable::InstanceMethods
+ extend Slugifiable::ClassMethods
 
   belongs_to :users
   has_many :book_categories

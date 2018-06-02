@@ -7,4 +7,9 @@ class Category < ActiveRecord::Base
   has_many :books, through: :book_categories
   has_many :users, through: :books
 
+  def self.valid_params?(params)
+    return !params[:name].empty?
+  end
+
+
 end

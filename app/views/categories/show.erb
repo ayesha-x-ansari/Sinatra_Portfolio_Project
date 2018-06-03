@@ -1,0 +1,8 @@
+
+<p><b>Category Name:</b> <%= @category.name %></p>
+
+<form method="post" action="/category/<%=@category.id%>/delete">
+  <input id="hidden" type="hidden" name="_method" value="delete">
+
+  <input  type="submit" value="delete">
+<form>

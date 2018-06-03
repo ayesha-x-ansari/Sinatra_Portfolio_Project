@@ -2,7 +2,9 @@ class CategoryController < ApplicationController
 set :views, Proc.new { File.join(root, "../views/categories") }
 
   get '/categories' do
-    @categories = Category.all
+    categories = Category.all
+    @categories = categories.sort_by { |a| [ a.name ] }
+
     erb :index
   end
   get '/categories/:slug' do

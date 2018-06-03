@@ -1,0 +1,12 @@
+<form action="/figures" method="POST">
+  <lable>Name</label>
+    <input type="text" id="booke_name" name="book[name]"><br></br>
+
+  <label><h4>Category</h4></label>
+    <% Category.all.each do |category| %>
+      <label><%= category.name %></label>
+      <input type="checkbox" id="category_<%=category.id%>" name="book[category_ids][]" value="<%= category.id %>"><br>
+
+    <% end %>
+ <label><h4>Create New Category:</h4></label>
+  <input type="text" id="new_category" name="category[name]">

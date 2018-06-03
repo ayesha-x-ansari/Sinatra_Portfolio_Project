@@ -8,24 +8,23 @@
     <nav>
       <% if logged_in? %>
 
-        <a href=""> Add Book </a>
-        <a href="/logout"> Log Out </a>
-        <p>Welcome, <%=current_user.name %></p>
-
+        <a href="">Add Book </a>   |
+        <a href="/logout">Log Out </a>
+        <p> Welcome, <%=current_user.name %></p>
       <% else %>
-        <a href="/signup">Sign Up</a>
+        <a href="/signup">Sign Up</a>  |
         <a href="/login"> Sign In </a>
       <%end %>
 
     </nav>
     <div class="container">
-      <h1>Golf Clubber</h1>
+      <h3>Author Membership</h3>
       <% if !@error_message.nil? %>
       <div class="alert alert-warning">
         <%= @error_message %>
       </div>
     <% end %>
-      <%= yield %> 
+      <%= yield %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

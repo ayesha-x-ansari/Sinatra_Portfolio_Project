@@ -1,6 +1,6 @@
 <form action="/figures" method="POST">
-  <lable>Name</label>
-    <input type="text" id="booke_name" name="book[name]"><br></br>
+  <lable><%=current_user.name %></label>
+    <input type="text" id="booke_name" name="book[name]" value="<%=current_user.name %>"  </><br></br>
 
   <label><h4>Category</h4></label>
     <% Category.all.each do |category| %>

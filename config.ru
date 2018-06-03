@@ -10,4 +10,5 @@ use Rack::Static, :urls => ['/css'], :root => 'public' # Rack fix allows seeing 
 use Rack::MethodOverride
 use UserController
 use CategoryController
+use BookController
 run ApplicationController

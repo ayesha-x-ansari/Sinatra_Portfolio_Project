@@ -1,6 +1,11 @@
 <form action="/figures" method="POST">
-  <lable><%=current_user.name %></label>
-    <input type="text" id="booke_name" name="book[name]" value="<%=current_user.name %>"  </><br></br>
+
+  <lable>Book Name  </label>
+  <input type="text" id="book_name" name="book[name]"><br></br>
+
+  <lable>Author Name  </label>
+    <input type="text" id="author_name" name="book[user][name]" value="<%=current_user.name %>"  readonly = true</><br></br>
+
 
   <label><h4>Category</h4></label>
     <% Category.all.each do |category| %>
@@ -10,3 +15,5 @@
     <% end %>
  <label><h4>Create New Category:</h4></label>
   <input type="text" id="new_category" name="category[name]">
+  <input type="submit" value="Create New Book">
+</form>

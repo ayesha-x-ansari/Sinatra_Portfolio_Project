@@ -1,14 +1,14 @@
-<title>Signup</title>
-<div align="center"><br>
+<h3>Home / Signup</h3>
+<h1>Signup</h1>
+<div align="center">
 <h3>Welcome to Signup Page for Author Membership</h3>
-<font color="red"><%= flash[:message] if flash.has?(:message) %></font>
-<h4>Please enter your login information:</h4>
-
+<h4>Please enter your Signup information</h4>
 <pre>
+<font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form action="/signup" method="POST">
        Name:  <input type="text" name="name"><br>
        Email:  <input type="email" name="email"><br>
     Password:  <input type="password" name="password"><br>
-  <input type="submit"  value="Submit" > | <a href='/login'>Login</a>
+            <input class="btn btn-success" type="submit" value="Signup" > | <a href='/login'>Login</a>
 </form></pre>
 </div>

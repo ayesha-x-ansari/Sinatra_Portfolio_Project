@@ -1,11 +1,13 @@
 <h3>Home / Password Reset</h3>
 <h1>Password Reset</h1>
 <div align="center">
+<h3>Welcome to Reset Page of Author Membership</h3>
+<h4>Please enter your Reset information</h4>
 <pre>
 <font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form method="post" action='/reset'>
      Email   <input type="text" name="email"><br>
   Password   <input type="password" name="password"><br>
-
-  <input type="submit" value="Reset" > | <a href='/login'>Login</a>
+         <input class="btn btn-success" type="submit" value="Reset" > | <a href='/login'>Login</a>
 </form> </pre>
+</div>

@@ -1,14 +1,13 @@
-<table>
-  <th> Books By "<%=current_user.name%>" </th><br>
-  <tr>
-    <% @books.each do |book| %>
-      <td align="center"><a href="/books/<%= book.id %>"><%= book.name %></a>
-      <ul>
-        <%book.categories.each do |category|%>
-        <li><%=category.name%></li>
-        <%end%>
-      </ul>
-     </tr> </td>
-  <% end %>
-</table>
+
+ <h4>Books By "<%=current_user.name%>"</h4>
+<br>
+<% @user.books.each do |book| %>
+
+<h4><a href="/books/<%= book.slug %>"><%=book.name%></a><br><h4>
+<ul>
+  <%book.categories.each do |category|%>
+    <li> <%=category.name%><br> </li>
+  <%end%>
+</ul>
+<% end %>
 <br>

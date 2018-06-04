@@ -2,7 +2,18 @@ class BookController < ApplicationController
 
     get '/books' do
       @books = Book.all
-      erb :'books/index'
+
+      if logged_in?
+        @user = User.find_by_id(session[:user_id])
+        erb :'/books/index'
+      else
+        redirect to '/login'
+      end
+    end
+
+    get '/books/all' do
+      @books = Book.all
+      erb :'books/all'
     end
 
     get '/books/new' do
@@ -15,15 +26,16 @@ class BookController < ApplicationController
       erb :'books/show'
     end
 
-    get '/books/:id/edit' do
-      @book = Book.find(params[:id])
+    get '/books/:slug/edit' do
+    #  @book = Book.find(params[:id])
+      @book = Book.find_by_slug(params[:slug])
       erb :'books/edit'
     end
 
     post '/books' do
 
       @book = Book.create(params[:book])
-      if !params[:category].empty?
+      if !params[:category][:name].empty?
         @book.categories << Category.create(params[:category])
       end
       @book.save
@@ -31,8 +43,8 @@ class BookController < ApplicationController
       #redirect to "/book/#{@book.id}"
     end
 
-    post '/books/:id' do
-      @book = Book.find(params[:id])
+    post '/books/:slug' do
+      @book = Book.find_by_slug(params[:slug])
       @book.update(params[:book])
 
       if !params[:category][:name].empty?
@@ -40,8 +52,8 @@ class BookController < ApplicationController
       end
 
       @book.save
-      binding.pry
-      redirect to "/books/#{@book.id}"
+
+    #  redirect to "/books/#{@book.id}"
     end
 
 end

@@ -1,0 +1,12 @@
+<h4>Books By "<%=current_user.name%>"</h4>
+<br>
+<% @user.books.each do |book| %>
+
+<h4><a href="/books/<%= book.slug %>"><%=book.name%></a><br><h4>
+<ul>
+ <%book.categories.each do |category|%>
+   <li> <%=category.name%><br> </li>
+ <%end%>
+</ul>
+<% end %>
+<br>

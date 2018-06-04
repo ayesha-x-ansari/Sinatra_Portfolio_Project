@@ -1,14 +1,16 @@
-class UserController < ApplicationController
+class AuthorController < ApplicationController
 
-  get '/' do
-      erb :home
+  get '/authors/home' do
+    redirect_if_not_logged_in
+    @user = User.find_by_id(session[:user_id])
+    erb :'/authors/home'
   end
 
   get '/signup' do
     if !session[:user_id]
-      erb :'users/new'
+      erb :'/authors/signup'
     else
-      erb :'/users/home'
+      erb :'/authors/signup'
     end
   end
 
@@ -31,15 +33,16 @@ class UserController < ApplicationController
 
     @user = User.create(:name => params[:name], :email => params[:email], :password => params[:password])
     session[:user_id] = @user.id
-    erb :'/users/home'
+    erb :'/authors/home'
   end
 
   get '/login' do
     @error_message = params[:error]
+
     if !session[:user_id]
-      erb :'users/login'
+      erb :'authors/login'
     else
-      erb :'users/home'
+      erb :'authors/home'
     end
   end
 
@@ -58,14 +61,14 @@ class UserController < ApplicationController
     @user = User.find_by(:email => params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      erb :'/users/home'
+      erb :'/authors/home'
     else
       redirect to '/reset'
     end
   end
 
   get '/reset' do
-    erb :'users/reset'
+    erb :'authors/reset'
   end
 
   post '/reset' do
@@ -77,21 +80,8 @@ class UserController < ApplicationController
       user.password = params[:password]
       user.save
       session[:user_id] = user.id
-      erb :'/users/home'
+      erb :'/authors/home'
       end
-
-  #get '/users/:id' do
-  #  if !logged_in?
-  #    redirect '/bags'
-  #  end
-
-  #  @user = User.find(params[:id])
-  #  if !@user.nil? && @user == current_user
-  #    erb :'users/show'
-  #  else
-  #    redirect '/bags'
-  #  end
-  #end
 
   get '/logout' do
     if session[:user_id] != nil

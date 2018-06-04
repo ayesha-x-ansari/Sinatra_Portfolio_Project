@@ -4,8 +4,21 @@
 </head>
 
 <body>
-  <h1>Welcome to Authors Registration Site</h1>
-  <h4>Please <a href='/signup'>Sign Up</a> or <a href='/login'>Log In</a> to access your account</h4>
+  <h4>Welcome to Authors Registration Site</h4>
+  <h5>Following are the Authors registered on Author Membership Site:</h5>
+
+  <% User.all.each do |user| %>
+    <b> Books By "<%=user.name%>" </b></br>
+      <% user.books.each do |book| %>
+        <%= book.name %>
+        <ul>
+          <%book.categories.each do |category|%>
+          <li><%=category.name%></li>
+        <%end%>
+        </ul>
+      <% end %>
+  <% end %>
+
 
 </body>
 

@@ -6,14 +6,11 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
     use Rack::Flash
     enable :sessions
-
-    set :session_secret, "golfclubsaregreat"
+    set :session_secret, "secret"
   end
 
-
   get '/' do
-    erb :index
-    #welcome to fwitter!!!
+    erb :home
   end
 
   helpers do
@@ -30,7 +27,6 @@ class ApplicationController < Sinatra::Base
     def current_user
 			User.find(session[:user_id])
 		end
-
   end
 
 end

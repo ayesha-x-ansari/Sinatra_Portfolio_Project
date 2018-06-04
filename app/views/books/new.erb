@@ -1,16 +1,15 @@
 <form action="/books" method="POST">
 
-  <lable>Book Name  </label>
-  <input type="text" id="book_name" name="book[name]"><br></br>
+  <lable>Author Name: <%=current_user.name%></label>
+  <input type="text" hidden=true id="user_name" name="book[user_id]" value="<%=current_user.id %>" readonly = true</input><br><br>
 
-  <lable>Author Name   </label>
-    <input type="text" id="user_name" name="book[user_id]" value=<%=current_user.id %> readonly = true</input>
-    <br></br>
+  <lable>Book Name  </label>
+  <input type="text" id="book_name" name="book[name]"><br>
 
   <label><h4>Category</h4></label>
     <% Category.all.each do |category| %>
       <label><%= category.name %></label>
-      <input type="checkbox" id="category_id" name="book[category_ids][]" value="<%= category.id %>"><%= category.id %><br>
+      <input type="checkbox" id="category_id" name="book[category_ids][]" value="<%= category.id %>"><br>
 
     <% end %>
  <label><h4>Create New Category:</h4></label>

@@ -8,12 +8,12 @@
     <nav>
       <% if logged_in? %>
 
-        <a href="">Add Book </a>   |
+        <a href="/books/new">Add Book </a>   |
         <a href="/logout">Log Out </a>
         <p> Welcome, <%=current_user.name %></p>
       <% else %>
         <a href="/signup">Sign Up</a>  |
-        <a href="/login"> Sign In </a>
+        <a href="/login">Login </a>
       <%end %>
 
     </nav>

@@ -8,7 +8,7 @@ use Rack::Static, :urls => ['/css'], :root => 'public' # Rack fix allows seeing 
 #end
 
 use Rack::MethodOverride
-use UserController
+use AuthorController
 use CategoryController
 use BookController
 run ApplicationController

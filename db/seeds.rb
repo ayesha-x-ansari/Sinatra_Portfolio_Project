@@ -1,10 +1,6 @@
 c = Category.create(name: "Science fiction")
 c = Category.create(name: "Fiction")
 c = Category.create(name: "Non Fiction")
-
-c = Category.create(name: "Science fiction")
-c = Category.create(name: "Fiction")
-c = Category.create(name: "Non fiction")
 c = Category.create(name: "Gardening")
 c = Category.create(name: "Satire")
 c = Category.create(name: "Drama")

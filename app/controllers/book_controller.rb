@@ -21,14 +21,14 @@ class BookController < ApplicationController
     end
 
     post '/books' do
-      binding.pry
-      @book = Book.create(params["book"])
-      if !params[:category][:name].empty?
+
+      @book = Book.create(params[:book])
+      if !params[:category].empty?
         @book.categories << Category.create(params[:category])
       end
-      @figure.save
-      binding.pry
-      redirect to "/figures/#{@figure.id}"
+      @book.save
+
+      #redirect to "/book/#{@book.id}"
     end
 
     post '/books/:id' do

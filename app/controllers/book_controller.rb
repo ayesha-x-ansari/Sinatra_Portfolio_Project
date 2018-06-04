@@ -59,4 +59,27 @@ class BookController < ApplicationController
     #  redirect to "/books/#{@book.id}"
     end
 
+    get '/books/:id' do
+    if logged_in?
+      @book= Book.find_by_id(params[:id])
+      erb :'/books/show'
+    else
+      redirect "/login"
+    end
+  end
+
+  delete "/books/:id/delete" do
+    if logged_in?
+      @book = Book.find_by_id(params[:id])
+      if @book.user_id == current_user.id
+        @book.delete
+        @book.save
+        redirect '/authors/signup'
+      end
+    end
+    redirect "/recipes"
+  end
+
+
+
 end

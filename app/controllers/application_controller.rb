@@ -1,5 +1,5 @@
-	uire 'rack-flash'
-class A     licationController < Sinatra::Base
+require 'rack-flash'
+class ApplicationController < Sinatra::Base
 
   configure do
     set :public_folder, 'public'

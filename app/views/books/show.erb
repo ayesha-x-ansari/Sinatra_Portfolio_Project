@@ -1,6 +1,6 @@
 <p><b>Book Name:</b> <%= @book.name %></p>
 
-<form method="post" action="/book/<%=@book.id%>/delete">
+<form method="post" action="/books/<%=@book.id%>/delete">
   <input id="hidden" type="hidden" name="_method" value="delete">
 
   <input  type="submit" value="delete">

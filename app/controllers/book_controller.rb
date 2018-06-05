@@ -21,12 +21,6 @@ class BookController < ApplicationController
       erb :'books/new'
     end
 
-
-    get '/books/:id' do
-      @book = Book.find(params[:id])
-      erb :'books/show'
-    end
-
     post '/books' do
       params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       @book = Book.create(params[:book])
@@ -73,13 +67,12 @@ class BookController < ApplicationController
       @book = Book.find_by_id(params[:id])
       if @book.user_id == current_user.id
         @book.delete
-        @book.save
-        redirect '/authors/signup'
+        flash[:message] = "Book deleted successfully"
+      else
+        flash[:message] = "You can't delete other Author's Book"
+        redirect '/authors/home'
       end
     end
-    redirect "/recipes"
+    redirect '/authors/home'
   end
-
-
-
 end

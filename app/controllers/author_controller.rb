@@ -10,25 +10,25 @@ class AuthorController < ApplicationController
     if !session[:user_id]
       erb :'/authors/signup'
     else
-      erb :'/authors/signup'
+      redirect '/authors/home'
     end
   end
 
   post '/signup' do
     if params[:name] == "" || params[:email] == ""  || params[:password] == ""
       flash[:message] = "All fields should be filled"
-      redirect to '/signup'
+      redirect  '/signup'
     end
 
     user = User.find_by(:email => params[:email])
     if !user.nil?
       flash[:message] = "A account already exists with this email address"
-      redirect("/signup")
+      redirect '/signup'
     end
 
     if params[:password].size < 5
       flash[:message] = "Password cannot be less than 5 characters"
-      redirect("/signup")
+      redirect  '/signup'
     end
 
     @user = User.create(:name => params[:name], :email => params[:email], :password => params[:password])
@@ -37,12 +37,11 @@ class AuthorController < ApplicationController
   end
 
   get '/login' do
-    @error_message = params[:error]
-
+    redirect_if_not_logged_in
     if !session[:user_id]
       erb :'authors/login'
     else
-      erb :'authors/home'
+      redirect '/authors/home'
     end
   end
 
@@ -68,7 +67,11 @@ class AuthorController < ApplicationController
   end
 
   get '/reset' do
-    erb :'authors/reset'
+    if !session[:user_id]
+      erb :'/authors/reset'
+    else
+      redirect '/authors/home'
+    end
   end
 
   post '/reset' do
@@ -76,12 +79,12 @@ class AuthorController < ApplicationController
       flash[:message] = "All fields should be filled"
       redirect to '/reset'
     end
-      user = User.find_by_email(params[:email])
-      user.password = params[:password]
-      user.save
-      session[:user_id] = user.id
-      erb :'/authors/home'
-      end
+    user = User.find_by_email(params[:email])
+    user.password = params[:password]
+    user.save
+    session[:user_id] = user.id
+    redirect '/authors/home'
+  end
 
   get '/logout' do
     if session[:user_id] != nil

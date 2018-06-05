@@ -37,7 +37,7 @@ class BookController < ApplicationController
       erb :'books/edit'
     end
 
-    post '/books/:slug' do
+    patch '/books/:slug' do
       params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       @book = Book.find_by_slug(params[:slug])
       @book.update(params[:book])

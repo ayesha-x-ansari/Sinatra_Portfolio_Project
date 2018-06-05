@@ -1,4 +1,5 @@
 
+<font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <p><b>Category Name:</b> <%= @category.name %></p>
 
 <form method="post" action="/category/<%=@category.id%>/delete">

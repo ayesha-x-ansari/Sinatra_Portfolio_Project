@@ -23,6 +23,7 @@ class CategoryController < ApplicationController
     end
     params[:name] = params[:name].split(" ").collect{|w| w.capitalize}.join(" ")
     @category = Category.create(params)
+    flash[:message] = "You created following category click delete, to delete this category."
     erb :'categories/show'
   end
 
@@ -48,6 +49,7 @@ class CategoryController < ApplicationController
     delete '/category/:id/delete' do #delete action
       @category = Category.find_by_id(params[:id])
       @category.delete
+      flash[:message] = "You deleted following category: "
       erb :'categories/deleted'
   end
 

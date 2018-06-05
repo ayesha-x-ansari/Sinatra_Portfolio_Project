@@ -1,6 +1,6 @@
-  <form action=<a href="/books/<%= book.slug %>"> method="POST">
+  <form action="/books/<%= @book.slug %>" method="POST">
   <input type="hidden" name="_method" value="patch">
-  <label>Name Book </label>
+  <label>Book Name</label>
   <input type="text" id="book_name" name="book[name]" value="<%= @book.name%>"><br></br>
   <label>Edit Category</label><br>
 
@@ -12,6 +12,6 @@
  <input type="text" id="new_category" name="category[name]"><br></br>
 
 
-  <input type="submit" value="Edit book">
+  <input type="submit" value="Edit this book">
 
 </form>

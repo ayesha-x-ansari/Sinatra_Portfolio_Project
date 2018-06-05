@@ -1,9 +1,7 @@
 class BookController < ApplicationController
 
     get '/books' do
-
       @books = Book.all
-
       if logged_in?
         @user = User.find_by_id(session[:user_id])
         erb :'/books/index'
@@ -29,28 +27,27 @@ class BookController < ApplicationController
         @book.categories << Category.create(params[:category])
       end
       @book.save
-       redirect '/authors/home'
+      flash[:message] = "Your book is added"
+      redirect '/authors/home'
     end
 
     get '/books/:slug/edit' do
-    #  @book = Book.find(params[:id])
+      @book = Book.find(params[:id])
       @book = Book.find_by_slug(params[:slug])
       erb :'books/edit'
     end
 
-
-
     post '/books/:slug' do
+      params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       @book = Book.find_by_slug(params[:slug])
       @book.update(params[:book])
-
+      params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       if !params[:category][:name].empty?
         @book.categories << Category.create(params[:category])
       end
-
       @book.save
-
-    #  redirect to "/books/#{@book.id}"
+      flash[:message] = "Your book is updated"
+      redirect '/authors/home'
     end
 
     get '/books/:id' do

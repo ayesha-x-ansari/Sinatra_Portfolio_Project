@@ -9,8 +9,7 @@
   <label><h4>Category</h4></label>
     <% Category.all.each do |category| %>
       <label><%= category.name %></label>
-      <input type="checkbox" id="category_id" name="book[category_ids][]" value="<%= category.id %>"><br>
-
+      <input type="checkbox" id="category_id" name="book[category_ids][]" value="<%= category.id %>">
     <% end %>
  <label><h4>Create New Category:</h4></label>
   <input type="text" id="new_category" name="category[name]">

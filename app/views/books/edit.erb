@@ -1,4 +1,4 @@
-<form action="/books/<%= @book.id %>/edit" method="POST">
+  <form action=<a href="/books/<%= book.slug %>"> method="POST">
   <input type="hidden" name="_method" value="patch">
   <label>Name Book </label>
   <input type="text" id="book_name" name="book[name]" value="<%= @book.name%>"><br></br>
@@ -6,23 +6,12 @@
 
   <% Category.all.each do |category| %>
     <label><%= category.name %></label>
-    <input type="checkbox" name="book[category_ids][]" value="<%= category.id %>" id="<%= category.name %>" <%='checked' if @figure.landmarks.include?(landmark) %>>
+    <input type="checkbox" name="book[category_ids][]" value="<%= category.id %>" id="<%= category.name %>" <%='checked' if @book.categories.include?(category) %>>
   <% end %>
- <label>Add New:</label>
- <input type="text" id="new_landmark" name="landmark[name]"><br></br>
+ <label>Add New category:</label>
+ <input type="text" id="new_category" name="category[name]"><br></br>
 
 
- <label>Edit Titles</label><br>
- <% Title.all.each do |title| %>
-    <label><%= title.name %></label>
-    <input type="checkbox" name="figure[title_ids][]" value="<%= title.id %>" id="<%= title.name %>" <%='checked' if @figure.titles.include?(title) %>>
-  <% end %></br>
- <label>Add New Title:</label>
- <input type="text" id="new_title" name="title[name]"><br></br>
-
-
-
-
-  <input type="submit" value="Edit Figure">
+  <input type="submit" value="Edit book">
 
 </form>

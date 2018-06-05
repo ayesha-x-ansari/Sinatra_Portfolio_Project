@@ -4,14 +4,15 @@
   <input type="text" hidden=true id="user_name" name="book[user_id]" value="<%=current_user.id %>" readonly = true</input><br><br>
 
   <lable>Book Name  </label>
-  <input type="text" id="book_name" name="book[name]"><br>
+  <input type="text" id="book_name" name="book[name]"><br><br>
 
   <label><h4>Category</h4></label>
     <% Category.all.each do |category| %>
       <label><%= category.name %></label>
       <input type="checkbox" id="category_id" name="book[category_ids][]" value="<%= category.id %>">
-    <% end %>
- <label><h4>Create New Category:</h4></label>
+    <% end %> <br><br>
+
+ <label><h4>Add New Category:</h4></label>
   <input type="text" id="new_category" name="category[name]">
-  <input type="submit" value="Create New Book">
+  <input type="submit" value="Add New Book">
 </form>

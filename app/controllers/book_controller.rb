@@ -32,7 +32,7 @@ class BookController < ApplicationController
     end
 
     get '/books/:slug/edit' do
-      @book = Book.find(params[:id])
+    #  @book = Book.find(params[:id])
       @book = Book.find_by_slug(params[:slug])
       erb :'books/edit'
     end

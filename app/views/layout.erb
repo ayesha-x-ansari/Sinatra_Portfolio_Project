@@ -8,9 +8,12 @@
     <nav>
       <% if logged_in? %>
 
-        <a href="/logout">Log Out </a>
+        <a href="/logout">Log Out </a>   |
+        <a href="/authors/home">Authors home</a>  |
+        <a href="/books/all">All books </a>   |
         <a href="/books/new">Add Book </a>   |
-        <a href="/books/new">Delete Book </a>   |
+        <a href="/categories">All categories</a>  |
+        <a href="/category/new">Add category</a>  |
         <p> Welcome, <%=current_user.name %></p>
       <% else %>
         <a href="/signup">Sign Up</a>  |

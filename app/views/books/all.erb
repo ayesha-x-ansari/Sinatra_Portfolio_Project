@@ -1,13 +1,13 @@
 <h3>Following are the Authors registered on Author Membership Site:</h3>
 
   <% User.all.each do |user| %>
-    <b> Books By "<%=user.name%>" </b></br>
+    <b> Books By "<%=user.name%>" </b><br>
       <% user.books.each do |book| %>
         <%= book.name %>
         <ul>
           <%book.categories.each do |category|%>
           <li><%=category.name%></li>
         <%end%>
-        </ul>
+      </ul>
       <% end %>
   <% end %>

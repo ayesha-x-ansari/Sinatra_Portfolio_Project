@@ -7,17 +7,12 @@ class CategoryController < ApplicationController
     erb :'categories/index'
   end
 
-  get '/categories/:slug' do
-    @category = Category.find_by_slug(params[:slug])
-    erb :'categories/show'
-  end
-
   get '/category/new' do
+    redirect_if_not_logged_in
     erb :'categories/new'
   end
 
   post "/category" do
-    redirect_if_not_logged_in
     unless Category.valid_params?(params)
       redirect "/category/new?error=Input Error"
     end
@@ -27,16 +22,20 @@ class CategoryController < ApplicationController
     erb :'categories/show'
   end
 
-  get '/category/:id/edit' do
-     redirect_if_not_logged_in
-  #  @error_message = params[:error]
-    @category = Category.find(params[:id])
-    erb :'categories/edit'
+  get '/category/:slug/edit' do
+    redirect_if_not_logged_in
+    @category = Category.find_by_slug(params[:slug])
+    @bookcategory = BookCategory.find_by(:category_id => @category.id)
+    if @bookcategory.nil?
+      erb :'categories/edit'
+    else
+      flash[:message] = "This category is in use you can't edit category which is in use: "
+      redirect '/authors/home'
+    end
 
   end
 
   post "/category/:id" do
-    #  redirect_if_not_logged_in
       @category = Category.find(params[:id])
       unless Category.valid_params?(params)
       #  redirect "/bags/#{@bag.id}/edit?error=invalid golf bag"
@@ -46,12 +45,23 @@ class CategoryController < ApplicationController
       erb :'categories/show'
     end
 
+    get '/category/:slug' do
+      redirect_if_not_logged_in
+      @category = Category.find_by_slug(params[:slug])
+      erb :'categories/show'
+    end
+
     delete '/category/:id/delete' do #delete action
-      @category = Category.find_by_id(params[:id])
-      @category.delete
-      flash[:message] = "You deleted following category: "
-      erb :'categories/deleted'
+      @bookcategory = BookCategory.find_by_category_id(params[:id])
+      if @bookcategory.nil?
+        @category = Category.find_by_id(params[:id])
+        @category.delete
+        flash[:message] = "Your selected category is deleted "
+        redirect '/authors/home'
+      else
+        flash[:message] = "This category is in use you can't delete category which is in use: "
+        redirect '/authors/home'
+      end
   end
 
 end
-  

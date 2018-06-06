@@ -2,7 +2,6 @@
 <br>
 <font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <% @user.books.each do |book| %>
-
 <h4><a href="/books/<%= book.slug %>/edit"><%=book.name%></a><br><h4>
 <ul>
  <%book.categories.each do |category|%>

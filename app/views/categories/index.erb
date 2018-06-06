@@ -1,6 +1,6 @@
 <h4>Categories</h4>
 <ol>
 <% @categories.each do |category| %>
-  <li><h4> <a href="/categories/<%= category.slug %>"><%= category.name %></a></h4> </li>
+  <li><h4> <a href="/category/<%= category.slug %>"><%= category.name %></a></h4> </li>
 <% end %>
-</ol>	
+</ol>

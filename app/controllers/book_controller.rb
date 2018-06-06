@@ -16,6 +16,7 @@ class BookController < ApplicationController
     end
 
     get '/books/new' do
+      redirect_if_not_logged_in
       erb :'books/new'
     end
 
@@ -32,7 +33,7 @@ class BookController < ApplicationController
     end
 
     get '/books/:slug/edit' do
-    #  @book = Book.find(params[:id])
+      redirect_if_not_logged_in
       @book = Book.find_by_slug(params[:slug])
       erb :'books/edit'
     end
@@ -50,13 +51,10 @@ class BookController < ApplicationController
       redirect '/authors/home'
     end
 
-    get '/books/:id' do
-    if logged_in?
-      @book= Book.find_by_id(params[:id])
+    get '/books/:slug' do
+      redirect_if_not_logged_in
+      @book= Book.find_by_slug(params[:slug])
       erb :'/books/show'
-    else
-      redirect "/login"
-    end
   end
 
   delete "/books/:id/delete" do

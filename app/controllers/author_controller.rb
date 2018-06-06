@@ -10,6 +10,7 @@ class AuthorController < ApplicationController
     if !session[:user_id]
       erb :'/authors/signup'
     else
+      flash[:message] = "You are already a member"
       redirect '/authors/home'
     end
   end
@@ -37,10 +38,10 @@ class AuthorController < ApplicationController
   end
 
   get '/login' do
-    redirect_if_not_logged_in
     if !session[:user_id]
       erb :'authors/login'
     else
+      flash[:message] = "You are already logged in"
       redirect '/authors/home'
     end
   end
@@ -62,6 +63,7 @@ class AuthorController < ApplicationController
       session[:user_id] = @user.id
       erb :'/authors/home'
     else
+      flash[:message] = "I think you forgot your password, please reset your password"
       redirect to '/reset'
     end
   end
@@ -70,6 +72,7 @@ class AuthorController < ApplicationController
     if !session[:user_id]
       erb :'/authors/reset'
     else
+      flash[:message] = "Please logout to reset your password"
       redirect '/authors/home'
     end
   end

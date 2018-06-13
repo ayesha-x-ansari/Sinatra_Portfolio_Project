@@ -1,7 +1,7 @@
 <form action="/books" method="POST">
 
   <lable>Author Name: <%=current_user.name%></label>
-  <input type="text" hidden=true id="user_name" name="book[user_id]" value="<%=current_user.id %>" readonly = true</input><br><br>
+  <input type="text" hidden=true id="user_name" name="book[author_id]" value="<%=current_user.id %>" readonly = true</input><br><br>
 
   <lable>Book Name  </label>
   <input type="text" id="book_name" name="book[name]"><br><br>

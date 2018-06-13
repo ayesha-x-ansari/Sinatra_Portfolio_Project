@@ -21,11 +21,11 @@ class ApplicationController < Sinatra::Base
     end
 
     def logged_in?
-      !!session[:user_id]
+      !!session[:author_id]
     end
 
     def current_user
-	User.find(session[:user_id])
+	     Author.find(session[:author_id])
      end
   end
 

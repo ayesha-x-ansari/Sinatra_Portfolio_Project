@@ -3,8 +3,8 @@ class BookController < ApplicationController
     get '/books' do
       @books = Book.all
       if logged_in?
-        @user = User.find_by_id(session[:user_id])
-        erb :'/books/index'
+      #  @author = Author.find_by_id(session[:author_id])
+        redirect '/authors/home'
       else
         redirect to '/login'
       end
@@ -29,7 +29,6 @@ class BookController < ApplicationController
       end
       @book.save
       flash[:message] = "Your book is added"
-      redirect '/authors/home'
     end
 
     get '/books/:slug/edit' do
@@ -60,7 +59,7 @@ class BookController < ApplicationController
   delete "/books/:id/delete" do
     if logged_in?
       @book = Book.find_by_id(params[:id])
-      if @book.user_id == current_user.id
+      if @book.author_id == current_user.author_id
         @book.delete
         flash[:message] = "Book deleted successfully"
       else

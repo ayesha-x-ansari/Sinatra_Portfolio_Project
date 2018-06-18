@@ -6,8 +6,8 @@ The Sinatra Portfolio Project app provides a database and web interface for Auth
 3.  Authors can only edit or delete their own books
 4.  Authors can add category to the book from the existing category or they can add new category while adding their book
 5.  On home page of this site authors can view books of other author.
-6.  All authors have capability to add or delete or edit a cateory regardless of who added the category. But a category which is        
-    already assigned to a book can neither be edited or deleted.
+6.  All authors have capability to add or delete or edit a cateory regardless of who added the category. But a category which is      already assigned to a book can neither be edited or deleted.
+ 
  This app was built with Sinatra, extended with Rake tasks for working with an SQL database using ActiveRecord ORM
 
 

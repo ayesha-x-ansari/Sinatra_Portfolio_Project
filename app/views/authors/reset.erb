@@ -6,8 +6,10 @@
 <pre>
 <font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form method="post" action='/reset'>
-     Email   <input type="text" name="email"><br>
-  Password   <input type="password" name="password"><br>
+  Mother's Maiden Name <input type="text" name="moms_maiden_name"><br>
+                 Email <input type="text" name="email"><br>
+              Password <input type="password" name="password"><br>
+ Password Confirmation <input type="password" name="password_confirmation"><br>
          <input class="btn btn-success" type="submit" value="Reset" > | <a href='/login'>Login</a>
 </form> </pre>
 </div>

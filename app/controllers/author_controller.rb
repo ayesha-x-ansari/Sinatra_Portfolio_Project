@@ -2,7 +2,7 @@ class AuthorController < ApplicationController
 
   get '/authors/home' do
     redirect_if_not_logged_in
-    @author = Author.find_by_id(session[:user_id])
+    @author = Author.find_by_id(session[:author_id])
     erb :'/authors/home'
   end
 
@@ -32,7 +32,12 @@ class AuthorController < ApplicationController
       redirect  '/signup'
     end
 
-    @author = Author.create(:name => params[:name], :email => params[:email], :password => params[:password])
+    if params[:password]  !=  params[:password_confirmation]
+      flash[:message] = "Passwords do not match"
+      redirect  '/signup'
+    end
+
+    @author = Author.create(:name => params[:name], :email => params[:email], :password => params[:password], :moms_maiden_name => params[:moms_maiden_name])
     session[:author_id] = @author.id
     erb :'/authors/home'
   end
@@ -60,7 +65,7 @@ class AuthorController < ApplicationController
 
     @author = Author.find_by(:email => params[:email])
     if @author && @author.authenticate(params[:password])
-      session[:author_id] = @uauthor.id
+      session[:author_id] = @author.id
       erb :'/authors/home'
     else
       flash[:message] = "I think you forgot your password, please reset your password"
@@ -78,11 +83,27 @@ class AuthorController < ApplicationController
   end
 
   post '/reset' do
+    author = Author.find_by_email(params[:email])
+    if author.moms_maiden_name  != params[:moms_maiden_name]
+      flash[:message] = "Please enter correct Mother's Maiden Name"
+      redirect to '/reset'
+    end
+
+    if params[:password].size < 5
+      flash[:message] = "Password cannot be less than 5 characters"
+      redirect  '/signup'
+    end
+
     if params[:email] == "" || params[:password] == ""
       flash[:message] = "All fields should be filled"
       redirect to '/reset'
     end
-    author = Author.find_by_email(params[:email])
+
+    if params[:password]  !=  params[:password_confirmation]
+      flash[:message] = "Passwords do not match"
+      redirect  '/reset'
+    end
+
     author.password = params[:password]
     author.save
     session[:author_id] = author.id

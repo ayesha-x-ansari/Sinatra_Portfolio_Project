@@ -1,23 +1,22 @@
 <h5><a href='/'>Home</a> / Signup</h5>
 <h4>Signup</h4>
-<pre>
 <div align="center">
+<h4>Welcome to Signup Page for Author Membership</h4>
+<h5> Please enter your Signup information: </h5>
+<pre>
 <font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form action="/signup" method="POST">
-            <h4>Welcome to Signup Page for Author Membership</h4>
-            <h5> Please enter your Signup information: </h5>
-            <label for="name">    Name:</label>
-            <input type="text" id="name" name="name" value="">
+            <label for="name">    Name</label> <input type="text" id="name" name="name" value="">
 
-            <label for="email">   Email:</label> <input type="text" id="email" name="email" value="">
+            <label for="email">   Email</label> <input type="text" id="email" name="email" value="">
 
-            <label for="password">Password:</label> <input type="text" id="password" name="password" value="">
+            <label for="password">Password</label> <input type="password" id="password" name="password" value="">
 
-<label for="password">Password Confirmation:</label> <input type="text" id="password_confirmation" name="password_confirmation" value="">
+<label for="password">Password Confirmation</label> <input type="password" id="password_confirmation" name="password_confirmation" value="">
 
-            <label for="">Password:</label> <input type="text" id="password" name="password" value="">
+ <label for="moms_maiden_name">Mother's Maiden Name</label> <input type="text" id="moms_maiden_name" name="moms_maiden_name" value="">
 
                     <input class="btn btn-success" type="submit" value="Signup" > | <a href='/login'>Login</a>
 </form>
-</div>
 </pre>
+</div>

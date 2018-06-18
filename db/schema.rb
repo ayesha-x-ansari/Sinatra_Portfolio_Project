@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 2018_06_02_064240) do
     t.string "name"
     t.string "email"
     t.string "password_digest"
+    t.string "moms_maiden_name"
   end
 
   create_table "book_categories", force: :cascade do |t|

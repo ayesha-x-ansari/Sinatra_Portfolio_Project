@@ -4,7 +4,7 @@ class Author < ActiveRecord::Base
   validates_presence_of :name, :email, :password, :mom_maiden_name
 
   include Slugifiable::InstanceMethods
-  extend Slugifiable::ClassMethods
+  extend  Slugifiable::ClassMethods
   
   has_many :books
   has_many :categories, through: :books

@@ -1,13 +1,13 @@
 # SinatraPortfolioProject
 
 The Sinatra Portfolio Project app provides a database and web interface for Authors to:
-    1.  Authors have to signup on this app inorder to add their books.
-    2.  Once signed up they can logon and start adding their books on this site.
-    3.  Authors can only edit or delete their own books
-    4.  Authors can add category to the book from the existing category or they can add a new category while adding their book
-    5.  On home page of this site authors can view books of other author.
-    6   All authors have capability to add or delete or edit a cateory regardless of who added the category. But a category which is             already assigned to a book can neither be edited or deleted.
- This app was built with Sinatra, extended with Rake tasks for working with an SQL database using ActiveRecord ORM.
+    Authors have to signup on this app inorder to add their books.
+    Once signed up they can logon and start adding their books on this site.
+    Authors can only edit or delete their own books
+    Authors can add category to the book from the existing category or they can add      new category while adding their book
+     On home page of this site authors can view books of other author.
+    All authors have capability to add or delete or edit a cateory regardless of who added the category. But a category which is  already assigned to a book can neither be edited or deleted.
+ This app was built with Sinatra, extended with Rake tasks for working with an SQL database using ActiveRecord ORM
 
 
 ## Installation

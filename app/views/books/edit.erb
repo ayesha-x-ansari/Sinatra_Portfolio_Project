@@ -2,14 +2,14 @@
   <input type="hidden" name="_method" value="patch">
   <label>Book Name</label>
   <input type="text" id="book_name" name="book[name]" value="<%= @book.name%>"><br></br>
-  <label>Edit Category</label><br>
+  <label>Edit Category:</label><br>
 
   <% Category.all.each do |category| %>
     <label><%= category.name %></label>
     <input type="checkbox" name="book[category_ids][]" value="<%= category.id %>" id="<%= category.name %>" <%='checked' if @book.categories.include?(category) %>>
   <% end %>
   <br><br>
- <label>Add New category:</label>
+ <label>Add New category</label>
  <input type="text" id="new_category" name="category[name]"><br></br>
 
 

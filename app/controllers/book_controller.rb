@@ -29,6 +29,7 @@ class BookController < ApplicationController
       end
       @book.save
       flash[:message] = "Your book is added"
+      redirect '/authors/home'
     end
 
     get '/books/:slug/edit' do

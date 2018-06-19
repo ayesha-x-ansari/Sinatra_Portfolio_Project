@@ -62,14 +62,20 @@ class AuthorController < ApplicationController
       flash[:message] = "Can't find your email please try again"
       redirect("/login")
     end
+    session[:try_count]  = session[:try_count]  +  1
 
     @author = Author.find_by(:email => params[:email])
     if @author && @author.authenticate(params[:password])
       session[:author_id] = @author.id
       erb :'/authors/home'
     else
-      flash[:message] = "I think you forgot your password, please reset your password"
-      redirect to '/reset'
+      if session[:try_count] > 2
+        flash[:message] = "I think you forgot your password, please reset your password"
+        session[:try_count] = 0
+        redirect to '/reset'
+      else
+        redirect("/login")
+      end
     end
   end
 

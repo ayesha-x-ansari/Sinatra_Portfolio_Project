@@ -25,7 +25,14 @@ class BookController < ApplicationController
       @book = Book.create(params[:book])
       params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       if !params[:category][:name].empty?
-        @book.categories << Category.create(params[:category])
+        @category  = Category.find_by_name(params[:category][:name])
+        if @category.nil?
+          @book.categories << Category.create(params[:category])
+        else
+          flash[:message] = "Category you tried to add is already present, please try again. "
+          redirect '/books/new'
+        end
+
       end
       @book.save
       flash[:message] = "Your book is added"
@@ -42,9 +49,16 @@ class BookController < ApplicationController
       params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       @book = Book.find_by_slug(params[:slug])
       @book.update(params[:book])
+
       params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       if !params[:category][:name].empty?
-        @book.categories << Category.create(params[:category])
+        @category  = Category.find_by_name(params[:category][:name])
+        if @category.nil?
+          @book.categories << Category.create(params[:category])
+        else
+          flash[:message] = "Category you tried to add is already present, please try again. "
+          redirect '/authors/home'
+        end
       end
       @book.save
       flash[:message] = "Your book is updated"

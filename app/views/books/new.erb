@@ -1,4 +1,5 @@
 <form action="/books" method="POST">
+  <font color="red"><%= flash[:message] if flash.has?(:message) %></font><br>
 
   <label> Author Name: <%=current_user.name%> </label>
   <input type="text" hidden=true id="user_name" name="book[author_id]" value="<%=current_user.id %>" readonly = true</input><br><br>

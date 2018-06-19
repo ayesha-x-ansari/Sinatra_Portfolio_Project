@@ -1,4 +1,5 @@
 <h4>Add a New Category</h4>
+<font color="red"><%= flash[:message] if flash.has?(:message) %></font>
 <form action="/category" method="POST">
     <label> Category Name </label> <input type="text" name="name"> <br><br>
     <input class="btn btn-success" type="submit" value="Create">

@@ -61,6 +61,10 @@ class AuthorController < ApplicationController
     if author.nil?
       flash[:message] = "Can't find your email please try again"
       redirect("/login")
+    else
+      if session[:try_count].nil?
+        session[:try_count] = 0
+      end
     end
     session[:try_count]  = session[:try_count]  +  1
 

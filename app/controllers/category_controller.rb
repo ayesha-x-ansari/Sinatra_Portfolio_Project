@@ -2,8 +2,8 @@ class CategoryController < ApplicationController
 #set :views, Proc.new { File.join(root, "../views/categories") }
 
   get '/categories' do
-     categories = Category.all
-     @categories = categories.sort_by { |category| [ category.name ] }
+    categories = Category.all
+    @categories = categories.sort_by { |category| [ category.name ] }
     erb :'categories/index'
   end
 
@@ -17,9 +17,15 @@ class CategoryController < ApplicationController
       redirect "/category/new?error=Input Error"
     end
     params[:name] = params[:name].split(" ").collect{|w| w.capitalize}.join(" ")
-    @category = Category.create(params)
-    flash[:message] = "You created following category click delete, to delete this category."
-    erb :'categories/show'
+    @category  = Category.find_by_name(params[:name])
+    if @category.nil?
+      @category = Category.create(params)
+      flash[:message] = "You created following category click delete, to delete this category."
+      erb :'categories/show'
+    else
+      flash[:message] = "Category you tried to add is already present, please try again. "
+      redirect '/category/new'
+    end
   end
 
   get '/category/:slug/edit' do

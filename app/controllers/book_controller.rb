@@ -22,22 +22,27 @@ class BookController < ApplicationController
 
     post '/books' do
       params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
-      @book = Book.create(params[:book])
-      params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
       if !params[:category][:name].empty?
+        params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
         @category  = Category.find_by_name(params[:category][:name])
         if @category.nil?
+          @book = Book.create(params[:book])
           @book.categories << Category.create(params[:category])
         else
           flash[:message] = "Category you tried to add is already present, please try again. "
           redirect '/books/new'
         end
-
+      else
+        @book = Book.create(params[:book])
       end
       @book.save
       flash[:message] = "Your book is added"
       redirect '/authors/home'
     end
+
+
+
+
 
     get '/books/:slug/edit' do
       redirect_if_not_logged_in
@@ -45,25 +50,24 @@ class BookController < ApplicationController
       erb :'books/edit'
     end
 
-    patch '/books/:slug' do
-      params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
-      @book = Book.find_by_slug(params[:slug])
-      @book.update(params[:book])
-
-      params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
-      if !params[:category][:name].empty?
-        @category  = Category.find_by_name(params[:category][:name])
-        if @category.nil?
-          @book.categories << Category.create(params[:category])
-        else
-          flash[:message] = "Category you tried to add is already present, please try again. "
-          redirect '/authors/home'
-        end
+  patch '/books/:slug' do
+    params[:book][:name] = params[:book][:name].split(" ").collect{|w| w.capitalize}.join(" ")
+    @book = Book.find_by_slug(params[:slug])
+    params[:category][:name] = params[:category][:name].split(" ").collect{|w| w.capitalize}.join(" ")
+    if !params[:category][:name].empty?
+      @category  = Category.find_by_name(params[:category][:name])
+      if @category.nil?
+        @book.categories << Category.create(params[:category])
+      else
+        flash[:message] = "Category you tried to add is already present, please try again. "
+        redirect '/authors/home'
       end
-      @book.save
-      flash[:message] = "Your book is updated"
-      redirect '/authors/home'
     end
+    @book.update(params[:book])
+    @book.save
+    flash[:message] = "Your book is updated"
+    redirect '/authors/home'
+end
 
     get '/books/:slug' do
       redirect_if_not_logged_in
@@ -74,7 +78,7 @@ class BookController < ApplicationController
   delete "/books/:id/delete" do
     if logged_in?
       @book = Book.find_by_id(params[:id])
-      if @book.author_id == current_user.author_id
+      if @book.author_id == current_user.id
         @book.delete
         flash[:message] = "Book deleted successfully"
       else

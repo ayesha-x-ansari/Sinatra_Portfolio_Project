@@ -1,6 +1,6 @@
 require 'rack-flash'
-class ApplicationController < Sinatra::Base
 
+class ApplicationController < Sinatra::Base
   configure do
     set :public_folder, 'public'
     set :views, 'app/views'
@@ -14,6 +14,7 @@ class ApplicationController < Sinatra::Base
   end
 
   helpers do
+	  
     def redirect_if_not_logged_in
       if !logged_in?
         redirect "/login?error=You have to be logged in to do that"
@@ -25,8 +26,9 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-	     Author.find(session[:author_id])
-     end
+      Author.find(session[:author_id])
+    end
+  
   end
-
+	
 end

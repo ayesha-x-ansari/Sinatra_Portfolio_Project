@@ -1,5 +1,6 @@
   <form action="/books/<%= @book.slug %>" method="POST">
   <input type="hidden" name="_method" value="patch">
+  <font color="red"><%= flash[:message] if flash.has?(:message) %></font><br>
   <label>Book Name</label>
   <input type="text" id="book_name" name="book[name]" value="<%= @book.name%>"><br></br>
   <label>Edit Category:</label><br>

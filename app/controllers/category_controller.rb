@@ -42,32 +42,32 @@ class CategoryController < ApplicationController
   end
 
   post "/category/:id" do
-      @category = Category.find(params[:id])
-      unless Category.valid_params?(params)
+    @category = Category.find(params[:id])
+    unless Category.valid_params?(params)
       #  redirect "/bags/#{@bag.id}/edit?error=invalid golf bag"
-      end
-      params[:name] = params[:name].split(" ").collect{|w| w.capitalize}.join(" ")
-      @category.update(params)
-      erb :'categories/show'
     end
+    params[:name] = params[:name].split(" ").collect{|w| w.capitalize}.join(" ")
+    @category.update(params)
+    erb :'categories/show'
+  end
 
-    get '/category/:slug' do
-      redirect_if_not_logged_in
-      @category = Category.find_by_slug(params[:slug])
-      erb :'categories/show'
+  get '/category/:slug' do
+    redirect_if_not_logged_in
+    @category = Category.find_by_slug(params[:slug])
+    erb :'categories/show'
+  end
+
+  delete '/category/:id/delete' do #delete action
+    @bookcategory = BookCategory.find_by_category_id(params[:id])
+    if @bookcategory.nil?
+      @category = Category.find_by_id(params[:id])
+      @category.delete
+      flash[:message] = "Your selected category is deleted "
+      redirect '/authors/home'
+    else
+      flash[:message] = "This category is in use you can't delete category which is in use: "
+      redirect '/authors/home'
     end
-
-    delete '/category/:id/delete' do #delete action
-      @bookcategory = BookCategory.find_by_category_id(params[:id])
-      if @bookcategory.nil?
-        @category = Category.find_by_id(params[:id])
-        @category.delete
-        flash[:message] = "Your selected category is deleted "
-        redirect '/authors/home'
-      else
-        flash[:message] = "This category is in use you can't delete category which is in use: "
-        redirect '/authors/home'
-      end
   end
 
 end

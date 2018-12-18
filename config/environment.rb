@@ -5,7 +5,7 @@ ENV['SINATRA_ENV'] ||= "production"
 
 ActiveRecord::Base.establish_connection(
   :adapter => "postgres",
-  :database => "db/nyc#{ENV['SINATRA_ENV']}.sqlite"
+  :database => "db/nyc#{ENV['SINATRA_ENV']}.postgres"
 )
 
 require_relative "../app/controllers/application_controller.rb"

@@ -10,6 +10,6 @@ production:
   encoding: unicode
   pool: 5
   host: <%= ENV['DATABASE_HOST'] %>
-  database: ruby-getting-started_production
+  database: db/nyc#{ENV['SINATRA_ENV']}.sqlite
   username: ruby-getting-started
   password: <%= ENV['RUBY-GETTING-STARTED_DATABASE_PASSWORD'] %>
